@@ -1,0 +1,23 @@
+<table class ="table">
+    <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Registration date</th>
+        <th>Admin</th>
+        <th>Admin Control</th>
+    </tr>
+    <% @users.each do |user| %>
+        <tr>
+            <td><%= user.name%></td>
+            <td><%= user.email%></td>
+            <td><%= user.created_at%></td>
+            <td><%= user.admin.to_s.gsub("true", "Yes")%></td>
+            <% if user.admin == true %>
+                <td><%= button_to "Delete Admin", {action: "delete_admin", id: user.id }, method: :delete %></td>
+            <% else %>
+               <td><%= button_to "Make Admin", {action: "make_admin", id: user.id }, method: :put %></td>
+            <%end%>
+        </tr>
+    <% end %>
+
+</table>
